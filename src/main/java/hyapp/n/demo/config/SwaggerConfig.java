@@ -20,10 +20,10 @@ public class SwaggerConfig {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host("poct.zjubme307.cn/hyapp")//线上环境配置，本地无需
+                .host("exp.zjubiomedit.com/hyapp")//线上环境配置，本地无需
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.hyapp.restful.demo.controller"))
+                .apis(RequestHandlerSelectors.basePackage("hyapp.n.demo.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
