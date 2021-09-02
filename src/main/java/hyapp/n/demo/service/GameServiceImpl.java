@@ -6,10 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import hyapp.n.demo.common.Event;
 import hyapp.n.demo.common.ResultModel;
 import hyapp.n.demo.common.Status;
-import hyapp.n.demo.entity.GameResult;
-import hyapp.n.demo.entity.GameResultWithTime;
-import hyapp.n.demo.entity.Player;
-import hyapp.n.demo.entity.Room;
+import hyapp.n.demo.entity.*;
 import hyapp.n.demo.mapper.GameMapper;
 import hyapp.n.demo.utils.Util;
 import lombok.extern.slf4j.Slf4j;
@@ -204,7 +201,8 @@ public class GameServiceImpl implements GameService {
             if(userInRoom.size()==1) {
                 String user = userInRoom.get(0);
                 userToStatus.put(user, Status.IN_ROOM);
-                gameMapper.insertSingleGameResult(unionId, score);
+                Player player = userToPlayer.get(user);
+                gameMapper.insertSingleGameResult(unionId, score, player.getNickName(), player.getPicUrl());
                 return result.sendSuccessResult("完成游戏，请等待游戏结果！");
             }
             for (String user : userInRoom) {
@@ -226,6 +224,8 @@ public class GameServiceImpl implements GameService {
                 userToStatus.put(user, Status.IN_ROOM);
                 gameResultWithTime.setUnionId(user);
                 gameMapper.insertGameResult(gameResultWithTime);
+                Player player = userToPlayer.get(user);
+                gameMapper.insertSingleGameResult(unionId, score, player.getNickName(), player.getPicUrl());
                 String res = util.postEventAndMessageByProfileId(user, Event.FINISH.getEvent(), gameResult.toString());
                 log.info(res);
             }
@@ -261,6 +261,17 @@ public class GameServiceImpl implements GameService {
             return gameResult;
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    @Override
+    public ResultModel<List<GameResultSingle>> getGameRank() {
+        ResultModel<List<GameResultSingle>> result = new ResultModel<>();
+        try {
+            List<GameResultSingle> list = gameMapper.getTopTenGameResult();
+            return result.sendSuccessResult(list);
+        } catch (Exception e) {
+            return result.sendFailedMessage(e);
         }
     }
 }

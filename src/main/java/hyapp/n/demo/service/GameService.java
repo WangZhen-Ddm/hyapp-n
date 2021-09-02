@@ -2,6 +2,10 @@ package hyapp.n.demo.service;
 
 import com.alibaba.fastjson.JSONArray;
 import hyapp.n.demo.common.ResultModel;
+import hyapp.n.demo.entity.GameResultSingle;
+import hyapp.n.demo.entity.Player;
+
+import java.util.List;
 
 /**
  * @author Wang Zhen
@@ -20,4 +24,6 @@ public interface GameService {
     ResultModel<String> setUnready(Integer roomID, String unionId);
 
     ResultModel<String> finishGame(Integer roomID, String unionId, Integer score);
+
+    ResultModel<List<GameResultSingle>> getGameRank();
 }

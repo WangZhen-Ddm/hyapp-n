@@ -2,6 +2,8 @@ package hyapp.n.demo.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import hyapp.n.demo.common.ResultModel;
+import hyapp.n.demo.entity.GameResultSingle;
+import hyapp.n.demo.entity.Player;
 import hyapp.n.demo.service.GameService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 /**
@@ -68,5 +72,11 @@ public class GameController {
                                           @RequestParam(value = "unionId") String unionId,
                                           @RequestParam(value = "score") int score) {
         return gameService.finishGame(roomID, unionId, score);
+    }
+
+    @ApiOperation(value = "获取排行榜")
+    @RequestMapping(value = "/rank/get", method = RequestMethod.POST)
+    public ResultModel<List<GameResultSingle>> getGameRank() {
+        return gameService.getGameRank();
     }
 }
