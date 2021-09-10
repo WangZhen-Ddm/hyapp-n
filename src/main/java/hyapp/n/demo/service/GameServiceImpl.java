@@ -265,6 +265,17 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public ResultModel<String> finishSingleGame(String unionId, String picUrl, String nickName, Integer score) {
+        ResultModel<String> result = new ResultModel<>();
+        try {
+            gameMapper.insertSingleGameResult(unionId, score, nickName, picUrl);
+            return result.sendSuccessResult("完成游戏！");
+        } catch (Exception e) {
+            return result.sendFailedMessage(e);
+        }
+    }
+
+    @Override
     public ResultModel<List<GameResultSingle>> getGameRank() {
         ResultModel<List<GameResultSingle>> result = new ResultModel<>();
         try {

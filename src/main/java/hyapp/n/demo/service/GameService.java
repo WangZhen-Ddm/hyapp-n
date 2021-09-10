@@ -25,5 +25,7 @@ public interface GameService {
 
     ResultModel<String> finishGame(Integer roomID, String unionId, Integer score);
 
+    ResultModel<String> finishSingleGame(String unionId, String picUrl, String nickName, Integer score);
+
     ResultModel<List<GameResultSingle>> getGameRank();
 }

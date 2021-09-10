@@ -74,6 +74,15 @@ public class GameController {
         return gameService.finishGame(roomID, unionId, score);
     }
 
+    @ApiOperation(value = "玩家单人游戏结束")
+    @RequestMapping(value = "/status/finish/single", method = RequestMethod.POST)
+    public ResultModel<String> finishSingleGame(@RequestParam(value = "unionId") String unionId,
+                                                @RequestParam(value = "picUrl") String picUrl,
+                                                @RequestParam(value = "nickName") String nickName,
+                                                @RequestParam(value = "score") int score) {
+        return gameService.finishSingleGame(unionId, picUrl, nickName, score);
+    }
+
     @ApiOperation(value = "获取排行榜")
     @RequestMapping(value = "/rank/get", method = RequestMethod.POST)
     public ResultModel<List<GameResultSingle>> getGameRank() {
