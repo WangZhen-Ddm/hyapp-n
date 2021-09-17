@@ -285,4 +285,19 @@ public class GameServiceImpl implements GameService {
             return result.sendFailedMessage(e);
         }
     }
+
+    @Override
+    public ResultModel<List<Player>> getPlayerListByRoom(Integer roomID) {
+        ResultModel<List<Player>> result = new ResultModel<>();
+        try {
+            List<String> userInRoom = userToRoom.get(roomID);
+            List<Player> list = new ArrayList<>();
+            for(String id: userInRoom) {
+                list.add(userToPlayer.get(id));
+            }
+            return result.sendSuccessResult(list);
+        } catch (Exception e) {
+            return result.sendFailedMessage(e);
+        }
+    }
 }

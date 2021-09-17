@@ -88,4 +88,10 @@ public class GameController {
     public ResultModel<List<GameResultSingle>> getGameRank() {
         return gameService.getGameRank();
     }
+
+    @ApiOperation(value = "获取房间人员信息")
+    @RequestMapping(value = "/player/list/get/by/room", method = RequestMethod.POST)
+    public ResultModel<List<Player>> getPlayerListByRoom(@RequestParam(value = "roomID") Integer roomID) {
+        return gameService.getPlayerListByRoom(roomID);
+    }
 }
