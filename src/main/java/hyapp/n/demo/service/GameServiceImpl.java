@@ -300,4 +300,16 @@ public class GameServiceImpl implements GameService {
             return result.sendFailedMessage(e);
         }
     }
+
+    @Override
+    public ResultModel<String> uploadBarrage(String unionId, String barrage) {
+        ResultModel<String> result = new ResultModel<>();
+        try {
+            String res = util.postEventAndMessageByProfileId(unionId, Event.BARRAGE.getEvent(), barrage);
+            log.info(res);
+            return result.sendSuccessResult("弹幕发送成功！");
+        } catch (Exception e) {
+            return result.sendFailedMessage(e);
+        }
+    }
 }

@@ -94,4 +94,11 @@ public class GameController {
     public ResultModel<List<Player>> getPlayerListByRoom(@RequestParam(value = "roomID") Integer roomID) {
         return gameService.getPlayerListByRoom(roomID);
     }
+
+    @ApiOperation(value = "提交弹幕信息")
+    @RequestMapping(value = "/barrage/upload", method = RequestMethod.POST)
+    public ResultModel<String> uploadBarrage(@RequestParam(value = "unionId") String unionId,
+                                             @RequestParam(value = "barrage") String barrage) {
+        return gameService.uploadBarrage(unionId, barrage);
+    }
 }

@@ -11,7 +11,8 @@ public enum Event {
     UNREADY("unready"),
     START("start"),
     FINISH("finish"),
-    RESULT("result");
+    RESULT("result"),
+    BARRAGE("barrage");
 
     private String event;
 

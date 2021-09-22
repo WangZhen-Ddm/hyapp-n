@@ -30,4 +30,6 @@ public interface GameService {
     ResultModel<List<GameResultSingle>> getGameRank();
 
     ResultModel<List<Player>> getPlayerListByRoom(Integer roomID);
+
+    ResultModel<String> uploadBarrage(String unionId, String barrage);
 }
